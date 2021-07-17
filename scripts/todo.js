@@ -26,17 +26,9 @@ function saveTasks() {
  * タスクを追加する
  * @param {string} task
  */
-function todo(task) {
+function add(task) {
     tasks.set(task, false);
     saveTasks();
-}
-
-/**
- * 未完了タスクの一覧を配列として取得する
- * @return {string[]}
- */
-function list() {
-    return Array.from(tasks).filter(pair => !pair[1]).map(pair => pair[0]);
 }
 
 /**
@@ -51,6 +43,23 @@ function done(task) {
 }
 
 /**
+ * タスクを削除する
+ * @param {string} task 
+ */
+ function del(task) {
+    tasks.delete(task);
+    saveTasks();
+}
+
+/**
+ * 未完了タスクの一覧を配列として取得する
+ * @return {string[]}
+ */
+ function list() {
+    return Array.from(tasks).filter(pair => !pair[1]).map(pair => pair[0]);
+}
+
+/**
  * 完了済みタスクの一覧を配列として取得する
  * @return {string[]}
  */
@@ -58,19 +67,10 @@ function donelist() {
     return Array.from(tasks).filter(pair => pair[1]).map(pair => pair[0]);
 }
 
-/**
- * タスクを削除する
- * @param {string} task 
- */
-function del(task) {
-    tasks.delete(task);
-    saveTasks();
-}
-
 module.exports = {
-    todo: todo,
-    list: list,
+    add: add,
     done: done,
-    donelist: donelist,
-    del: del
+    del: del,
+    list: list,
+    donelist: donelist
 };
